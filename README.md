@@ -20,9 +20,8 @@
 
 \## Как использовать
 
+1\. Скачай input.docx и положи в C:\\Temp\\
 
-dotnet run -- "C:/Temp/input.docx" "C:/Temp/"
-
-
-Готовый JSON: C:/Temp/quiz\_adapted.json
+2\. Запусти: dotnet run -- "C:/Temp/input.docx" "C:/Temp/"
+3. Результат: C:/Temp/quiz\_adapted.json с ~300 вопросами
 
