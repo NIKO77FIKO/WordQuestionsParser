@@ -40,7 +40,7 @@ Proqramı işə salmaq üçün iki əsas yol var:
 
 ### 5. Nəticə
 - Proqram işlədikdən sonra konsolda belə mesaj görəcəksiniz: Gərək! Fayl saxlanıldı: C:/Temp/quiz_adapted.json Tapılan sual sayı: ~300
-- - **C:\Temp\quiz_adapted.json** faylını açın — orada bütün ~300 sual JSON formatında olacaq!
+- **C:\Temp\quiz_adapted.json** faylını açın — orada bütün ~300 sual JSON formatında olacaq!
 
 ### Qeyd
 - Əgər "Fayl tapılmadı" xətası alırsınızsa → input.docx faylının **C:\Temp** qovluğunda olduğundan əmin olun.
