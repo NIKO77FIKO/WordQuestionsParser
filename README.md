@@ -11,9 +11,15 @@ Word faylından (.docx) sualları və cavab variantlarını çıxararaq JSON for
 - Nəticəni quiz_adapted.json faylında saxlayır
 
 ## Necə istifadə etmək
-1. input.docx faylını yükləyin və C:\Temp qovluğuna qoyun
+1. input.docx faylını yükləyin və "C:\Temp" qovluğuna qoyun
+2. Konsolu layihə qovluğuna keçin: cd "Path\To\Folder\With\Project\WordQuestionsParser"
+
+dotnet restore
+dotnet build
+
+dotnet run -- "C:\Temp\input.docx" "C:\"
 2. Konsolda layihə qovluğuna keçin və icra edin: dotnet run -- "C:/Temp/input.docx" "C:/Temp/"
-3. Nəticə: C:/Temp/quiz_adapted.json faylı ~300 sualla
+3. Nəticə: "C:/Temp/quiz_adapted.json" faylı ~300 sualla
 
 ## Nəticənin nümunəsi (quiz_adapted.json)
 
