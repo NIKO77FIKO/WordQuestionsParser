@@ -1,4 +1,4 @@
-\# WordQuestionsParser 
+\# WordQuestionsParser
 
 
 
@@ -28,4 +28,14 @@
 
 2\. Запусти: dotnet run -- "C:/Temp/input.docx" "C:/Temp/"
 3. Результат: C:/Temp/quiz\_adapted.json с ~300 вопросами
+
+## Пример результата (questions.json)
+
+
+
+Вот как выглядит фрагмент сгенерированного JSON (первые вопросы):
+
+
+
+!\[Пример JSON с вопросами](example-quiz-json.png)
 
