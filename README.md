@@ -29,7 +29,9 @@
 2\. Запусти: dotnet run -- "C:/Temp/input.docx" "C:/Temp/"
 3. Результат: C:/Temp/quiz\_adapted.json с ~300 вопросами
 
-## Пример результата (questions.json)
+
+
+\## Пример результата (quiz\_adapted.json)
 
 
 
