@@ -26,17 +26,17 @@ Layihəni işə salmaq üçün aşağıdakı addımları izləyin. Hamısı sad�
    (Əgər layihə başqa yerdədirsə, yolu özünüzə uyğun dəyişdirin)
 
 ### 3. Lazım olan paketləri bərpa edin və layihəni qurun
-- "dotnet restore"
-- "dotnet build"
+- dotnet restore
+- dotnet build
 
 ### 4. Proqramı işə salın
 Proqramı işə salmaq üçün iki əsas yol var:
 
 #### Variant 1 – Ən sadə və tövsiyə olunan (nəticə C:\Temp qovluğunda saxlanılır)
-- "dotnet run -- "C:/Temp/input.docx" "C:/Temp/""
+- dotnet run -- "C:/Temp/input.docx" "C:/Temp/"
 
 #### Variant 2 – Nəticəni C: kökündə saxlamaq istəyirsinizsə (tövsiyə olunmur, amma işləyir)
-- "dotnet run -- "C:/Temp/input.docx" "C:/""
+- dotnet run -- "C:/Temp/input.docx" "C:/"
 
 ### 5. Nəticə
 - Proqram işlədikdən sonra konsolda belə mesaj görəcəksiniz: Gərək! Fayl saxlanıldı: C:/Temp/quiz_adapted.json Tapılan sual sayı: ~300
