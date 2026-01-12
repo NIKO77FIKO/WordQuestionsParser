@@ -2,21 +2,41 @@
 
 [![.NET](https://img.shields.io/badge/.NET-10-blue?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com)
 
-Консольное приложение на C# (.NET 10), которое извлекает вопросы и варианты ответов из Word-файла (.docx) и сохраняет в JSON.
+Word faylından (.docx) sualları və cavab variantlarını çıxararaq JSON formatında saxlayan C# konsol tətbiqi.
 
-## Что делает
-- Парсит ~300 вопросов из документа по теории цепей (Dövrlər nəzəriyyəsi)
-- Определяет вопросы по знаку "?"
-- Автоматически присваивает варианты A/B/C...
-- Сохраняет в quiz_adapted.json
+## Nə edir
+- Dövrlər nəzəriyyəsi fənni üzrə ~300 sualı avtomatik ayırd edir
+- Sualları "?" işarəsi ilə müəyyənləşdirir
+- Cavab variantlarını A/B/C... kimi avtomatik təyin edir
+- Nəticəni quiz_adapted.json faylında saxlayır
 
-## Как использовать
-1. Скачай input.docx и положи в C:\Temp\
-2. Запусти: dotnet run -- "C:/Temp/input.docx" "C:/Temp/"
-3. Результат: C:/Temp/quiz_adapted.json с ~300 вопросами
+## Necə istifadə etmək
+1. input.docx faylını yükləyin və C:\Temp qovluğuna qoyun
+2. Konsolda layihə qovluğuna keçin və icra edin: dotnet run -- "C:/Temp/input.docx" "C:/Temp/"
+3. Nəticə: C:/Temp/quiz_adapted.json faylı ~300 sualla
 
-## Пример результата (quiz_adapted.json)
+## Nəticənin nümunəsi (quiz_adapted.json)
 
-Вот как выглядит фрагмент сгенерированного JSON (первые вопросы):
+İlk sualların JSON formatında necə göründüyü:
 
-![Пример JSON с вопросами](example-quiz-json.png)
+![JSON nəticəsinin nümunəsi](example-quiz-json.png)
+
+(Saytdan skrinşot çəkin, `example-quiz-json.png` adı ilə saxlayın və repozitoriyaya əlavə edin)
+
+## Quraşdırma və inkişaf
+- .NET 10 SDK quraşdırılmış olmalıdır
+- Layihəni klonlayın: git clone https://github.com/NIKO77FIKO/WordQuestionsParser.git
+- Lazım olan paketləri bərpa edin: dotnet restore
+- Tətbiqi işə salın (yuxarıdakı nümunəyə baxın)
+
+## Gələcək planlar
+- Sualların düzgün cavablarını avtomatik aşkarlamaq (bold şrift və ya başqa işarələr)
+- Fərqli formatlara ixrac (CSV, Excel, Quizlet və s.)
+- GUI (Windows Forms və ya WPF) əlavə etmək
+- Bir neçə Word faylını toplu emal etmək
+
+Əməkdaşlığa hazıram!  
+Təklifləriniz və ya pull request-ləriniz varsa – xoş gəlmisiniz 😊
+
+## Müəllif
+- GitHub: [@NIKO77FIKO](https://github.com/NIKO77FIKO)
