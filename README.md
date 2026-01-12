@@ -22,6 +22,7 @@ Layihəni işə salmaq üçün aşağıdakı addımları izləyin. Hamısı sad�
 ### 2. Konsolu açın və layihə qovluğuna keçin
 1. **Win + R** düymələrini basın → `cmd` yazın → Enter.
 2. Konsolda layihə qovluğuna keçin: cd C:\Users\Nihat\source\repos\WordQuestionsParser\WordQuestionsParser
+
    (Əgər layihə başqa yerdədirsə, yolu özünüzə uyğun dəyişdirin)
 
 ### 3. Lazım olan paketləri bərpa edin və layihəni qurun
