@@ -38,6 +38,10 @@ Proqramı işə salmaq üçün iki əsas yol var:
 #### Variant 2 – Nəticəni C: kökündə saxlamaq istəyirsinizsə (tövsiyə olunmur, amma işləyir)
 - dotnet run -- "C:/Temp/input.docx" "C:/"
 
+#### Variant 3 – Bir neçə Word faylını toplu emal etmək
+- dotnet run -- "C:/Temp/Docs" "C:/Temp/Output"
+- Hər .docx faylı üçün ayrıca `<fayl_adı>_quiz.json` yaradılacaq
+
 ### 5. Nəticə
 - Proqram işlədikdən sonra konsolda belə mesaj görəcəksiniz: Gərək! Fayl saxlanıldı: C:/Temp/quiz_adapted.json Tapılan sual sayı: ~300
 - **C:\Temp\quiz_adapted.json** faylını açın — orada bütün ~300 sual JSON formatında olacaq!
@@ -45,6 +49,10 @@ Proqramı işə salmaq üçün iki əsas yol var:
 ### Qeyd
 - Əgər "Fayl tapılmadı" xətası alırsınızsa → input.docx faylının **C:\Temp** qovluğunda olduğundan əmin olun.
 - Proqram hər dəfə işə salındıqda əvvəlki quiz_adapted.json faylını yenidən yazır.
+
+### Troubleshooting
+- Əgər `dotnet build` və ya `dotnet run` zamanı `Program.cs`-də `+`/`-` kimi “Invalid token” xətaları görürsünüzsə, fayl təsadüfən diff mətn kimi saxlanıb. Repozitoriyanı yenidən klonlayın və `Program.cs` faylını dəyişmədən yenidən yoxlayın.
+- Faylın kodlaşdırmasının UTF-8 (BOM-suz) olduğundan əmin olun.
 
 Uğurlar! 🚀  
 Hər hansı sualınız olarsa, mənə yazın.

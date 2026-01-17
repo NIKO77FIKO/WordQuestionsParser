@@ -1,4 +1,4 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Newtonsoft.Json;
 using System;
@@ -9,42 +9,75 @@ using System.Text.RegularExpressions;
 
 class Program
 {
+    private const string DefaultOutputFileName = "quiz_adapted.json";
+
     static void Main(string[] args)
     {
         if (args.Length != 2)
         {
-            Console.WriteLine("Использование: program.exe <путь_к_word> <папка_выхода>");
-            Console.WriteLine("Пример: program.exe \"C:\\Temp\\input.docx\" \"C:\\Temp\\\"");
+            Console.WriteLine("Использование: program.exe <путь_к_word_или_папке> <папка_выхода>");
+            Console.WriteLine("Пример (файл): program.exe \"C:\\Temp\\input.docx\" \"C:\\Temp\\\"");
+            Console.WriteLine("Пример (папка): program.exe \"C:\\Temp\\Docs\" \"C:\\Temp\\Output\"");
             return;
         }
 
-        string inputDocx = args[0];
+        string inputPath = args[0];
         string outputFolder = args[1];
-
-        if (!File.Exists(inputDocx))
-        {
-            Console.WriteLine($"Файл не найден: {inputDocx}");
-            return;
-        }
-
-        Directory.CreateDirectory(outputFolder);
 
         try
         {
-            var questions = ExtractQuestions(inputDocx);
-            string json = JsonConvert.SerializeObject(questions, Formatting.Indented);
+            Directory.CreateDirectory(outputFolder);
+            var inputFiles = GetInputFiles(inputPath);
+            if (inputFiles.Count == 0)
+            {
+                Console.WriteLine("Подходящих .docx файлов не найдено.");
+                return;
+            }
 
-            string outputPath = Path.Combine(outputFolder, "quiz_adapted.json");
-            File.WriteAllText(outputPath, json);
+            foreach (var filePath in inputFiles)
+            {
+                var questions = ExtractQuestions(filePath);
+                string json = JsonConvert.SerializeObject(questions, Formatting.Indented);
 
-            Console.WriteLine($"Готово! Файл сохранён: {outputPath}");
-            Console.WriteLine($"Найдено вопросов: {questions.Count}");
+                string outputPath = BuildOutputPath(outputFolder, filePath, inputFiles.Count);
+                File.WriteAllText(outputPath, json);
+
+                Console.WriteLine($"Готово! Файл сохранён: {outputPath}");
+                Console.WriteLine($"Найдено вопросов: {questions.Count}");
+            }
         }
         catch (Exception ex)
         {
             Console.WriteLine("Ошибка:");
             Console.WriteLine(ex.Message);
         }
+    }
+
+    static List<string> GetInputFiles(string inputPath)
+    {
+        if (File.Exists(inputPath))
+        {
+            return new List<string> { inputPath };
+        }
+
+        if (Directory.Exists(inputPath))
+        {
+            return Directory.GetFiles(inputPath, "*.docx").OrderBy(path => path).ToList();
+        }
+
+        Console.WriteLine($"Файл или папка не найдены: {inputPath}");
+        return new List<string>();
+    }
+
+    static string BuildOutputPath(string outputFolder, string inputFilePath, int totalInputs)
+    {
+        if (totalInputs == 1)
+        {
+            return Path.Combine(outputFolder, DefaultOutputFileName);
+        }
+
+        string baseName = Path.GetFileNameWithoutExtension(inputFilePath);
+        return Path.Combine(outputFolder, $"{baseName}_quiz.json");
     }
 
     static List<QuizQuestion> ExtractQuestions(string filePath)
@@ -62,8 +95,8 @@ class Program
                 string text = (para.InnerText ?? "").Trim();
                 if (string.IsNullOrWhiteSpace(text)) continue;
 
-                // Если заканчивается "?" — это вопрос (все 300 в твоём файле такие)
-                if (text.EndsWith("?"))
+                // Вопросы чаще всего заканчиваются на "?" или начинаются с номера.
+                if (IsQuestion(text))
                 {
                     if (current != null && current.options.Count > 0)
                         questions.Add(current);
@@ -80,8 +113,8 @@ class Program
                 // Если есть текущий вопрос — добавляем как вариант
                 if (current != null)
                 {
-                    // Проверяем на формат "A) текст" (как в конце документа)
-                    var optionMatch = Regex.Match(text, @"^([A-E])\)\s*(.+)$", RegexOptions.IgnoreCase);
+                    // Проверяем на формат "A) текст", "A. текст", "A - текст"
+                    var optionMatch = Regex.Match(text, @"^([A-J])\s*[\)\.\-]\s*(.+)$", RegexOptions.IgnoreCase);
                     string key;
                     string content = text;
 
@@ -113,6 +146,16 @@ class Program
         }
 
         return questions;
+    }
+
+    static bool IsQuestion(string text)
+    {
+        if (text.EndsWith("?"))
+        {
+            return true;
+        }
+
+        return Regex.IsMatch(text, @"^\s*\d+[\)\.]\s+");
     }
 }
 
